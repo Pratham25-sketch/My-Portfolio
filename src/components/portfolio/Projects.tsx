@@ -1,4 +1,13 @@
-import { ExternalLink, Github, TrendingUp, Shield, Zap, Users, Star, Clock } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  TrendingUp,
+  Shield,
+  Zap,
+  Users,
+  Star,
+  Clock,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -21,11 +30,18 @@ interface ProjectCardProps {
   subtitle: string;
   description: string;
   techStack: string[];
-  metrics: { icon: React.ReactNode; value: string; label: string }[];
+  metrics: MetricProps[];
   githubUrl?: string;
 }
 
-const ProjectCard = ({ title, subtitle, description, techStack, metrics, githubUrl }: ProjectCardProps) => {
+const ProjectCard = ({
+  title,
+  subtitle,
+  description,
+  techStack,
+  metrics,
+  githubUrl,
+}: ProjectCardProps) => {
   return (
     <div className="glass-card rounded-2xl p-6 md:p-8 hover-lift">
       <div className="space-y-6">
@@ -36,14 +52,16 @@ const ProjectCard = ({ title, subtitle, description, techStack, metrics, githubU
         </div>
 
         {/* Description */}
-        <p className="text-muted-foreground leading-relaxed">{description}</p>
+        <p className="text-muted-foreground leading-relaxed">
+          {description}
+        </p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2">
           {techStack.map((tech) => (
-            <Badge 
-              key={tech} 
-              variant="secondary" 
+            <Badge
+              key={tech}
+              variant="secondary"
               className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
             >
               {tech}
@@ -51,7 +69,7 @@ const ProjectCard = ({ title, subtitle, description, techStack, metrics, githubU
           ))}
         </div>
 
-        {/* Metrics Grid */}
+        {/* Metrics */}
         <div className="grid sm:grid-cols-2 gap-3 pt-4 border-t border-border">
           {metrics.map((metric, index) => (
             <Metric key={index} {...metric} />
@@ -61,21 +79,34 @@ const ProjectCard = ({ title, subtitle, description, techStack, metrics, githubU
         {/* Actions */}
         <div className="flex gap-3 pt-4">
           {githubUrl ? (
-            <Button asChild variant="outline" className="border-primary/50 hover:bg-primary/10">
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+            <Button
+              asChild
+              variant="outline"
+              className="border-primary/50 hover:bg-primary/10"
+            >
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="w-4 h-4 mr-2" />
                 View Code
               </a>
             </Button>
           ) : (
-            <Button variant="outline" className="border-primary/50 hover:bg-primary/10" disabled>
+            <Button
+              variant="outline"
+              className="border-primary/50 hover:bg-primary/10"
+              disabled
+            >
               <Github className="w-4 h-4 mr-2" />
               Coming Soon
             </Button>
           )}
+
           <Button variant="ghost" className="text-muted-foreground" disabled>
             <ExternalLink className="w-4 h-4 mr-2" />
-            Live Demo
+            Live Demo(Coming soon)
           </Button>
         </div>
       </div>
@@ -88,8 +119,10 @@ const Projects = () => {
     {
       title: "Forever Beater",
       subtitle: "AI Heart Wellness Platform",
-      description: "A comprehensive health monitoring platform powered by AI, featuring real-time analytics dashboards, secure authentication, and personalized insights using OpenAI integration.",
+      description:
+        "A comprehensive health monitoring platform powered by AI, featuring real-time analytics dashboards, secure authentication, and personalized insights using OpenAI integration.",
       techStack: ["React", "Node.js", "MongoDB", "Clerk", "OpenAI"],
+      githubUrl: "https://github.com/Pratham25-sketch/FOREVER-BEATER",
       metrics: [
         { icon: <TrendingUp className="w-4 h-4" />, value: "5+", label: "Analytical Dashboards" },
         { icon: <Zap className="w-4 h-4" />, value: "60%", label: "Less Manual Data Entry" },
@@ -104,14 +137,16 @@ const Projects = () => {
     {
       title: "Vacation Rental Platform",
       subtitle: "Full-Stack Booking System",
-      description: "A scalable vacation rental marketplace with advanced search optimization, secure payment processing, and a robust review system supporting hundreds of concurrent users.",
+      description:
+        "A scalable vacation rental marketplace with advanced search optimization, secure payment processing, and a robust review system supporting hundreds of concurrent users.",
       techStack: ["JavaScript", "Node.js", "Express", "MongoDB", "EJS", "Bootstrap"],
+      githubUrl: "https://github.com/Pratham25-sketch/Airbnb-clone",
       metrics: [
         { icon: <Users className="w-4 h-4" />, value: "50+", label: "Active Listings" },
         { icon: <TrendingUp className="w-4 h-4" />, value: "95%", label: "Booking Success Rate" },
         { icon: <Shield className="w-4 h-4" />, value: "<0.2%", label: "Payment Failures" },
         { icon: <Star className="w-4 h-4" />, value: "200+", label: "Reviews (4.5+ Rating)" },
-        { icon: <Zap className="w-4 h-4" />, value: "3s→400ms", label: "Search Optimization" },
+        { icon: <Zap className="w-4 h-4" />, value: "3s → 400ms", label: "Search Optimization" },
         { icon: <Users className="w-4 h-4" />, value: "500+", label: "Concurrent Users" },
         { icon: <TrendingUp className="w-4 h-4" />, value: "30%", label: "UI Responsiveness" },
         { icon: <Clock className="w-4 h-4" />, value: "NoSQL", label: "Scalable Schema" },
